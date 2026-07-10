@@ -520,7 +520,7 @@ function App() {
             <p className="section-eyebrow">// Selected Works</p>
             <h2 className="section-title">Past Projects</h2>
           </div>
-          <p className="section-sub">A curated selection of commercial, narrative, and documentary edits from recent years.</p>
+          <p className="section-sub"></p>
         </div>
         <div className="works-grid">
           <div className="work-card big reveal">
@@ -1153,6 +1153,15 @@ function App() {
                 <input
                   type="text"
                   placeholder="e.g. ₹3L or $5,000"
+                  value={contactData.budgetRange}
+                  onChange={(e) => setContactData((prev) => ({ ...prev, budgetRange: e.target.value }))}
+                />
+              </div>
+              <div className="form-group">
+                <label>Your Contact</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Mail or Phone or Any Social Media "
                   value={contactData.budgetRange}
                   onChange={(e) => setContactData((prev) => ({ ...prev, budgetRange: e.target.value }))}
                 />

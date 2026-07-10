@@ -1150,18 +1150,12 @@ function App() {
             <div className="form-row">
               <div className="form-group">
                 <label>Budget Range</label>
-                <select
+                <input
+                  type="text"
+                  placeholder="e.g. ₹3L or $5,000"
                   value={contactData.budgetRange}
                   onChange={(e) => setContactData((prev) => ({ ...prev, budgetRange: e.target.value }))}
-                >
-                  <option value="" disabled>
-                    Select range...
-                  </option>
-                  <option value="₹50K – ₹1L">₹50K – ₹1L</option>
-                  <option value="₹1L – ₹3L">₹1L – ₹3L</option>
-                  <option value="₹3L – ₹10L">₹3L – ₹10L</option>
-                  <option value="₹10L+">₹10L+</option>
-                </select>
+                />
               </div>
               <div className="form-group">
                 <label>Timeline</label>

@@ -405,32 +405,28 @@ section { padding: 120px 60px; }
 }
 
 .works-grid {
-  display:flex;
-  justify-content:center;
-  gap:40px;
-  align-items:center;
-  overflow-x:auto;
-  padding:40px 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 32px;
+  padding: 40px 0;
 }
 
 .work-card {
-  width:250px;
-  aspect-ratio:9/16;
-  filter:blur(3px);
-  opacity:.45;
-  transform:scale(.88);
-  flex:none;
-  border-radius:28px;
-  overflow:hidden;
-  position:relative;
-  transition:.5s;
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .work-card:hover {
-  filter:none;
-  opacity:1;
-  transform:scale(1);
-  z-index:10;
+  transform: translateY(-8px);
+  border-color: var(--cyan);
+  box-shadow: 0 12px 30px rgba(0, 212, 255, 0.15);
+  z-index: 10;
 }
 
 .work-card.big { grid-column: span 7; }
@@ -469,8 +465,8 @@ section { padding: 120px 60px; }
 .play-btn {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s;
+  opacity: 0.85;
+  transition: all 0.3s ease;
 }
 
 .play-btn-inner {
@@ -480,6 +476,7 @@ section { padding: 120px 60px; }
   display: flex; align-items: center; justify-content: center;
   backdrop-filter: blur(10px);
   background: rgba(0,212,255,0.2);
+  transition: transform 0.3s ease;
 }
 
 .play-btn-inner::after {
@@ -491,6 +488,7 @@ section { padding: 120px 60px; }
 }
 
 .work-card:hover .play-btn { opacity: 1; }
+.work-card:hover .play-btn-inner { transform: scale(1.1); }
 
 .work-info { padding: 24px 28px 28px; }
 

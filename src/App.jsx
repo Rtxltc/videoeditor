@@ -260,7 +260,7 @@ function App() {
     }
 
     const webhookUrl = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
-    
+
     // Check if webhook is configured
     if (!webhookUrl || webhookUrl.includes('YOUR_WEBHOOK_URL_HERE')) {
       setContactStatus({
@@ -333,7 +333,7 @@ function App() {
 
       if (response.ok) {
         setContactStatus({ type: 'success', message: 'Message sent successfully!' });
-        
+
         // Reset form fields
         setContactData({
           firstName: '',

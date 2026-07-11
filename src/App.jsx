@@ -466,11 +466,14 @@ function App() {
 
   return (
     <>
-      <nav>
+      <nav className="header-nav">
         <div className="nav-logo">
           RTX<span>.</span>
         </div>
         <ul className="nav-links">
+          <li>
+            <a href="#hero">Home</a>
+          </li>
           <li>
             <a href="#works">Works</a>
           </li>
@@ -553,15 +556,16 @@ function App() {
         </div>
         <div className="stat-item">
           <div className="stat-num">
-            <span className="count" data-target="5">
+            <span className="count" data-target="3">
               0
             </span>
+            <span>+</span>
           </div>
           <div className="stat-label">Years Experience</div>
         </div>
         <div className="stat-item">
           <div className="stat-num">
-            <span className="count" data-target="5">
+            <span className="count" data-target="20">
               0
             </span>
             <span>+</span>
@@ -604,13 +608,13 @@ function App() {
         <div className="works-grid">
           {WORKS_DATA.filter(item => selectedCategory === 'All' || item.category === selectedCategory).map((item) => {
             const isYoutube = !!item.youtubeId;
-            const thumbUrl = isYoutube 
+            const thumbUrl = isYoutube
               ? `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`
               : item.thumbnailUrl;
 
             return (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 className={`work-card reveal ${item.gridClass}`}
               >
                 <div className="work-thumb">
@@ -1068,7 +1072,14 @@ function App() {
 
       {videoOverlay && (
         <div className="video-overlay" onClick={closeVideoOverlay}>
-          <div className="video-overlay-panel" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="video-overlay-panel"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: videoOverlay.youtubeId && videoOverlay.isVertical ? '420px' : '900px',
+              width: '100%'
+            }}
+          >
             <button className="video-overlay-close" onClick={closeVideoOverlay} aria-label="Close video overlay">
               ×
             </button>
@@ -1078,11 +1089,23 @@ function App() {
                 // Category: {videoOverlay.category}
               </p>
             </div>
-            
+
             {videoOverlay.youtubeId ? (
-              <div className="video-iframe-container" style={{ position: 'relative', paddingBottom: videoOverlay.isVertical ? '177.78%' : '56.25%', height: 0, overflow: 'hidden', borderRadius: '12px', background: '#000' }}>
+              <div
+                className="video-iframe-container"
+                style={{
+                  height: videoOverlay.isVertical ? 'min(70vh, 640px)' : 'auto',
+                  width: videoOverlay.isVertical ? 'auto' : '100%',
+                  aspectRatio: videoOverlay.isVertical ? '9/16' : '16/9',
+                  maxWidth: '100%',
+                  margin: '0 auto',
+                  borderRadius: '12px',
+                  background: '#000',
+                  overflow: 'hidden'
+                }}
+              >
                 <iframe
-                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                  style={{ width: '100%', height: '100%', border: 0 }}
                   src={`https://www.youtube.com/embed/${videoOverlay.youtubeId}?autoplay=1&rel=0`}
                   title={videoOverlay.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

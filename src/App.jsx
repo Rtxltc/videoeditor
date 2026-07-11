@@ -478,6 +478,9 @@ function App() {
             <a href="#works">Works</a>
           </li>
           <li>
+            <a href="#services">Services</a>
+          </li>
+          <li>
             <a href="#process">Process</a>
           </li>
           <li>
@@ -501,9 +504,9 @@ function App() {
         <div className="hero-content">
           <p className="hero-eyebrow">// Video Editor & Motion Designer</p>
           <h1 className="hero-title">
-            <span className="line1">CRAFTING</span>
-            <span className="line2" data-text="STORIES">
-              STORIES
+            <span className="line1">SOULMATRIX</span>
+            <span className="line2" data-text="VISUALS">
+              VISUALS
             </span>
           </h1>
           <p className="hero-sub">
@@ -655,6 +658,35 @@ function App() {
         </div>
       </section>
 
+      <section id="services">
+        <div className="services-inner">
+          <p className="section-eyebrow">// What I Offer</p>
+          <h2 className="section-title">Services</h2>
+          <div className="services-grid">
+            <div className="service-card reveal">
+              <span className="service-icon">🎥</span>
+              <h3 className="service-card-title">Content / Video</h3>
+              <p className="service-card-desc">High-quality video production and editing designed to grab attention and tell compelling stories.</p>
+            </div>
+            <div className="service-card reveal reveal-delay-1">
+              <span className="service-icon">🪝</span>
+              <h3 className="service-card-title">Graphics & Hooks</h3>
+              <p className="service-card-desc">Stunning visual graphics and scroll-stopping hooks that make people stop and watch.</p>
+            </div>
+            <div className="service-card reveal reveal-delay-2">
+              <span className="service-icon">🔍</span>
+              <h3 className="service-card-title">SEO</h3>
+              <p className="service-card-desc">Strategic search engine optimization to get your content found on Google and search.</p>
+            </div>
+            <div className="service-card reveal reveal-delay-3">
+              <span className="service-icon">📈</span>
+              <h3 className="service-card-title">Social Media Management</h3>
+              <p className="service-card-desc">Consistent strategy, scheduling, and management to stay consistent and grow your presence.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="process">
         <div className="process-bg-text">WORKFLOW</div>
         <div className="process-inner">
@@ -792,31 +824,31 @@ function App() {
           <p className="section-eyebrow">// Career Journey</p>
           <h2 className="section-title">Experience</h2>
           <div className="timeline">
-            <div className="timeline-item reveal">
-              <div className="timeline-dot" />
-              <div className="timeline-year">2022 — Present</div>
-              <div className="timeline-company">Freelance / Independent</div>
-              <div className="timeline-role">Senior Video Editor & Director</div>
-              <p className="timeline-desc">
-                Working directly with global brands, streaming platforms, and indie filmmakers. Built a roster of 10+ recurring clients across India. Specializing in commercial storytelling and documentary work.
-              </p>
-            </div>
-            <div className="timeline-item reveal reveal-delay-2">
-              <div className="timeline-dot" />
-              <div className="timeline-year">2022 — 2023</div>
-              <div className="timeline-company">Training at ZEE Institute</div>
-              <div className="timeline-role">Student Editor</div>
-              <p className="timeline-desc">
-                Completed intensive training in video editing, storytelling, and post-production techniques.
-              </p>
-            </div>
             <div className="timeline-item reveal reveal-delay-1">
               <div className="timeline-dot" />
-              <div className="timeline-year">2024-2026</div>
-              <div className="timeline-company">Senior Video Editor</div>
-              <div className="timeline-role">Lead Editor — Of veron labs</div>
+              <div className="timeline-year">2023 — 2026</div>
+              <div className="timeline-company">Independent Video Editor & Content Creator</div>
+              <div className="timeline-role">Video Production & Storytelling</div>
               <p className="timeline-desc">
-                Led editing on 4+ junior editors, providing mentorship and guidance in post-production workflows.
+                Created cybersecurity and medical education video content using AI tools (Veo3, Kling AI) for documentary-style scripting, short-form Reels, and explainer videos. Managed end-to-end post-production workflows using CapCut, Canva, and VN Editor.
+              </p>
+            </div>
+            <div className="timeline-item reveal reveal-delay-4">
+              <div className="timeline-dot" />
+              <div className="timeline-year">Earlier</div>
+              <div className="timeline-company">Technical & Development Projects</div>
+              <div className="timeline-role">Full-Stack & Security Projects</div>
+              <p className="timeline-desc">
+                Developed security-focused and web applications including DSCP (a secure messaging platform with steganography) and custom restaurant billing automation tools.
+              </p>
+            </div>
+            <div className="timeline-item reveal reveal-delay-5">
+              <div className="timeline-dot" />
+              <div className="timeline-year">Earlier</div>
+              <div className="timeline-company">Full-Stack & Systems Engineering</div>
+              <div className="timeline-role">Developer & System Automator</div>
+              <p className="timeline-desc">
+                Built full-stack portfolios (React + PHP) and script-based automation utilities, strengthening software engineering and programming fundamentals.
               </p>
             </div>
           </div>
@@ -1146,6 +1178,7 @@ function App() {
           </div>
           <nav className="footer-nav">
             <a href="#works">Works</a>
+            <a href="#services">Services</a>
             <a href="#process">Process</a>
             <a href="#skills">Skills</a>
             <a href="#contact">Contact</a>

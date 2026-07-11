@@ -194,71 +194,6 @@ function App() {
   }, [reviews]);
 
   useEffect(() => {
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
-    let mx = 0;
-    let my = 0;
-    let rx = 0;
-    let ry = 0;
-
-    const onMouseMove = (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      if (cursor) {
-        cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
-      }
-    };
-
-    document.addEventListener('mousemove', onMouseMove);
-
-    let rafId = 0;
-    function animateRing() {
-      rx += (mx - rx - 20) * 0.15;
-      ry += (my - ry - 20) * 0.15;
-      if (ring) {
-        ring.style.transform = `translate(${rx}px, ${ry}px)`;
-      }
-      rafId = requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    const hoverElements = Array.from(document.querySelectorAll('a, button, .work-card, .skill-card'));
-    const hoverListeners = hoverElements.map((el) => {
-      const handleMouseEnter = () => {
-        if (ring) {
-          ring.style.width = '60px';
-          ring.style.height = '60px';
-          ring.style.borderColor = 'rgba(255,107,26,0.6)';
-        }
-      };
-      const handleMouseLeave = () => {
-        if (ring) {
-          ring.style.width = '40px';
-          ring.style.height = '40px';
-          ring.style.borderColor = 'rgba(0,212,255,0.5)';
-        }
-      };
-      el.addEventListener('mouseenter', handleMouseEnter);
-      el.addEventListener('mouseleave', handleMouseLeave);
-      return { el, handleMouseEnter, handleMouseLeave };
-    });
-
-    const cards = Array.from(document.querySelectorAll('.work-card'));
-    const tiltListeners = cards.map((card) => {
-      const handleMouseMoveCard = (e) => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 6}deg) translateZ(20px) scale(1.02)`;
-      };
-      const handleMouseLeaveCard = () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0) scale(1)';
-      };
-      card.addEventListener('mousemove', handleMouseMoveCard);
-      card.addEventListener('mouseleave', handleMouseLeaveCard);
-      return { card, handleMouseMoveCard, handleMouseLeaveCard };
-    });
-
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -341,16 +276,6 @@ function App() {
     window.addEventListener('scroll', handleNavActive);
 
     return () => {
-      document.removeEventListener('mousemove', onMouseMove);
-      cancelAnimationFrame(rafId);
-      hoverListeners.forEach(({ el, handleMouseEnter, handleMouseLeave }) => {
-        el.removeEventListener('mouseenter', handleMouseEnter);
-        el.removeEventListener('mouseleave', handleMouseLeave);
-      });
-      tiltListeners.forEach(({ card, handleMouseMoveCard, handleMouseLeaveCard }) => {
-        card.removeEventListener('mousemove', handleMouseMoveCard);
-        card.removeEventListener('mouseleave', handleMouseLeaveCard);
-      });
       revealObserver.disconnect();
       statsObserver.disconnect();
       window.removeEventListener('scroll', handleScroll);
@@ -541,9 +466,6 @@ function App() {
 
   return (
     <>
-      <div id="cursor" />
-      <div id="cursor-ring" />
-
       <nav>
         <div className="nav-logo">
           RTX<span>.</span>

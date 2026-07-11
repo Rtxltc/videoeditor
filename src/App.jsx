@@ -146,7 +146,7 @@ const WORKS_DATA = [
 
 function App() {
   const [reviews, setReviews] = useState(() => {
-    try {
+        try {
       const stored = localStorage.getItem('portfolioReviews');
       return stored ? JSON.parse(stored) : reviewsData;
     } catch (err) {
@@ -341,13 +341,13 @@ function App() {
 
     // 2. Build Discord embed payload
     const embedPayload = {
-      username: "RTX Portfolio Bot",
+      username: "SOULMATRIX VISUALS Portfolio Bot",
       avatar_url: "https://i.imgur.com/E857d4j.png",
       embeds: [
         {
           title: "🎬 New Project Inquiry!",
           description: "A client has submitted a message via your portfolio's contact form.",
-          color: 16739098, // RTX Orange (#FF6B1A)
+          color: 16739098, // SOULMATRIX VISUALS Orange (#FF6B1A)
           fields: [
             {
               name: "👤 Client Name",
@@ -381,7 +381,7 @@ function App() {
           ],
           timestamp: new Date().toISOString(),
           footer: {
-            text: "RTX Portfolio Contact System",
+            text: "SOULMATRIX VISUALS Portfolio Contact System",
             icon_url: "https://i.imgur.com/E857d4j.png"
           }
         }
@@ -468,7 +468,7 @@ function App() {
     <>
       <nav className="header-nav">
         <div className="nav-logo">
-          RTX<span>.</span>
+          SOULMATRIX VISUALS<span>.</span>
         </div>
         <ul className="nav-links">
           <li>
@@ -1171,10 +1171,10 @@ function App() {
       <footer>
         <div className="footer-inner">
           <div className="footer-logo">
-            RTX<span>.</span>
+            SOULMATRIX VISUALS<span>.</span>
           </div>
           <div className="footer-copy">
-            © 2024 RTX — Crafting stories, <span>frame by frame</span>
+            © 2024 SOULMATRIX VISUALS — Crafting stories, <span>frame by frame</span>
           </div>
           <nav className="footer-nav">
             <a href="#works">Works</a>

@@ -1,7 +1,148 @@
 import { useEffect, useMemo, useState } from 'react';
 import reviewsData from './reviews.json';
-import sample1 from '../sample_1.mp4';
-import sample2 from '../sample_2.mp4';
+import zomatoCover from './zomato_cover.png';
+import realEstateCover1 from './real_estate_cover1.png';
+import realEstateCover2 from './real_estate_cover2.png';
+import cafeCover from './cafe_cover.png';
+
+const WORKS_DATA = [
+  {
+    id: 'sunit-long',
+    title: 'Dr. Sunit — Kegel Exercise Guide (Long Form)',
+    category: 'Healthcare',
+    videoUrl: 'https://youtu.be/PDxm6HxDTfU?si=CDV5oxun-uDeW9bT',
+    youtubeId: 'PDxm6HxDTfU',
+    isVertical: false,
+    gridClass: 'span-8',
+    meta: 'Long Form · 2024',
+    tags: ['Premiere Pro', 'Educational', 'Color Grading'],
+    description: 'A complete clinical and practical walkthrough on Kegel exercises.'
+  },
+  {
+    id: 'sunit-short',
+    title: 'Dr. Sunit — Kegel Exercise (Short)',
+    category: 'Healthcare',
+    videoUrl: 'https://youtube.com/shorts/LR2OjeREIQo?si=A2VoStY6qNDZ1qod',
+    youtubeId: 'LR2OjeREIQo',
+    isVertical: true,
+    gridClass: 'span-4',
+    meta: 'Short · 2024',
+    tags: ['After Effects', 'Sound Design', 'Vertical Format'],
+    description: 'A high-impact medical short capturing key exercises in under 60 seconds.'
+  },
+  {
+    id: 'shobhika-long',
+    title: 'Dr. Shobhika — Women\'s Wellness',
+    category: 'Healthcare',
+    videoUrl: 'https://youtu.be/c9mmN8zpLUA?si=IYnFQR-wPuZE1mbD',
+    youtubeId: 'c9mmN8zpLUA',
+    isVertical: false,
+    gridClass: 'span-8',
+    meta: 'Long Form · 2024',
+    tags: ['Premiere Pro', 'Healthcare', 'Educational'],
+    description: 'Educational narrative on women\'s healthcare and diagnostic guidelines.'
+  },
+  {
+    id: 'shobhika-short',
+    title: 'Dr. Shobhika — Women\'s Health (Short)',
+    category: 'Healthcare',
+    videoUrl: 'https://youtube.com/shorts/nEUelIPy9EQ?si=oqfouxICAwBr04TY',
+    youtubeId: 'nEUelIPy9EQ',
+    isVertical: true,
+    gridClass: 'span-4',
+    meta: 'Short · 2024',
+    tags: ['After Effects', 'Motion Graphics', 'Short'],
+    description: 'Bite-sized healthcare insights focusing on common wellness questions.'
+  },
+  {
+    id: 'govind-short',
+    title: 'Dr. Govind — Healthcare Tip (Short)',
+    category: 'Healthcare',
+    videoUrl: 'https://youtube.com/shorts/ld1J6_4zrFg?si=Gm0egekFtN7SFEgF',
+    youtubeId: 'ld1J6_4zrFg',
+    isVertical: true,
+    gridClass: 'span-4',
+    meta: 'Short · 2024',
+    tags: ['After Effects', 'Kinetic Text', 'Short'],
+    description: 'Professional medical tips paired with high-retention typographic animation.'
+  },
+  {
+    id: 'shamita-short',
+    title: 'Dr. Shamita — Dental Care Guide (Short)',
+    category: 'Healthcare',
+    videoUrl: 'https://youtube.com/shorts/Xi2zD12nD0k?si=kOOrnOcikupbFkZ5',
+    youtubeId: 'Xi2zD12nD0k',
+    isVertical: true,
+    gridClass: 'span-4',
+    meta: 'Short · 2024',
+    tags: ['After Effects', 'Medical Tip', 'Vertical Format'],
+    description: 'Informative short highlighting basic dental hygiene tips and practices.'
+  },
+  {
+    id: 'honey-bhaskar-short',
+    title: 'Dr. Honey Bhaskar — Skincare Tip (Short)',
+    category: 'Healthcare',
+    videoUrl: 'https://youtube.com/shorts/pW84Q9SkUTg?si=7z_lE0FFdIQhvnLu',
+    youtubeId: 'pW84Q9SkUTg',
+    isVertical: true,
+    gridClass: 'span-4',
+    meta: 'Short · 2024',
+    tags: ['Premiere Pro', 'Visual Edits', 'Short'],
+    description: 'Expert advice on skincare routines, designed for social media feeds.'
+  },
+  {
+    id: 'zomato',
+    title: 'Zomato — Food Delivery Story',
+    category: 'Reels & Socials',
+    videoUrl: 'https://www.instagram.com/reel/DYPEI0ZTBOD/?igsh=bHFrNDR4MjAyNDYx',
+    isInstagram: true,
+    thumbnailUrl: zomatoCover,
+    isVertical: true,
+    gridClass: 'span-3',
+    meta: 'Instagram Reel · 2025',
+    tags: ['Premiere Pro', 'Color Grading', 'Food Promo'],
+    description: 'High-energy pacing and storytelling highlighting Zomato\'s courier system.'
+  },
+  {
+    id: 'real-estate-1',
+    title: 'Luxury Villa Showcase (Reel 1)',
+    category: 'Reels & Socials',
+    videoUrl: 'https://www.instagram.com/reel/DG95bIuyUP9/?igsh=MTJ4Y3Mza25qNDBlcg==',
+    isInstagram: true,
+    thumbnailUrl: realEstateCover1,
+    isVertical: true,
+    gridClass: 'span-3',
+    meta: 'Instagram Reel · 2025',
+    tags: ['Cinematic', 'Sound Design', 'Property Tour'],
+    description: 'A smooth walkthrough of an elite luxury villa with stylized lighting.'
+  },
+  {
+    id: 'real-estate-2',
+    title: 'Modern Penthouse Tour (Reel 2)',
+    category: 'Reels & Socials',
+    videoUrl: 'https://www.instagram.com/reel/DTEL7NbkrH_/?igsh=MWw0djI4aTNqdjhnbQ==',
+    isInstagram: true,
+    thumbnailUrl: realEstateCover2,
+    isVertical: true,
+    gridClass: 'span-3',
+    meta: 'Instagram Reel · 2025',
+    tags: ['Premiere Pro', 'Interior Design', 'Motion Graphics'],
+    description: 'Sweeping drone footage and interior pans tracking property features.'
+  },
+  {
+    id: 'cafe',
+    title: 'Aesthetic Cafe Vibe & Brew',
+    category: 'Reels & Socials',
+    videoUrl: 'https://www.instagram.com/reel/DG95bIuyUP9/?igsh=MTJ4Y3Mza25qNDBlcg==',
+    isInstagram: true,
+    thumbnailUrl: cafeCover,
+    isVertical: true,
+    gridClass: 'span-3',
+    meta: 'Instagram Reel · 2025',
+    tags: ['Sound Design', 'Color Correction', 'Aesthetic Vibe'],
+    description: 'Capturing cozy sensory details and latte art in a warm ambient cafe setting.'
+  }
+];
 
 function App() {
   const [reviews, setReviews] = useState(() => {
@@ -16,6 +157,7 @@ function App() {
   const [feedback, setFeedback] = useState({ name: '', role: '', rating: 5, message: '' });
   const [submissionStatus, setSubmissionStatus] = useState('');
   const [videoOverlay, setVideoOverlay] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   const [contactData, setContactData] = useState({
     firstName: '',
@@ -35,8 +177,8 @@ function App() {
     return reviews.reduce((sum, review) => sum + review.rating, 0) / reviewCount;
   }, [reviews, reviewCount]);
 
-  const openVideoOverlay = (src, title) => {
-    setVideoOverlay({ src, title });
+  const openVideoOverlay = (item) => {
+    setVideoOverlay(item);
   };
 
   const closeVideoOverlay = () => {
@@ -520,271 +662,70 @@ function App() {
             <p className="section-eyebrow">// Selected Works</p>
             <h2 className="section-title">Past Projects</h2>
           </div>
-          <p className="section-sub"></p>
+          <p className="section-sub">
+            A dynamic display of clinical healthcare videos and engaging social media reels. Click any card to play.
+          </p>
         </div>
+
+        <div className="works-filters">
+          {['All', 'Healthcare', 'Reels & Socials'].map((cat) => (
+            <button
+              key={cat}
+              className={`filter-tab ${selectedCategory === cat ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         <div className="works-grid">
-          <div className="work-card big reveal">
-            <div className="work-thumb">
-              <video
-                className="portfolio-video"
-                src={sample1}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-              <div className="thumb-overlay" />
-              <div className="play-btn" onClick={() => openVideoOverlay(sample1, 'Nike — Run The City Campaign')}>
-                <div className="play-btn-inner" />
-              </div>
-            </div>
-            <div className="work-info">
-              <div className="work-cat">Commercial</div>
-              <div className="work-title">Nike — "Run The City" Campaign</div>
-              <div className="work-meta">
-                <span>2024</span>
-                <span className="work-meta-sep">·</span>
-                <span>3:45 min</span>
-                <span className="work-meta-sep">·</span>
-                <span>42M Views</span>
-              </div>
-              <div className="work-tags">
-                <span className="tag highlight">Premiere Pro</span>
-                <span className="tag highlight">After Effects</span>
-                <span className="tag">Color Grade</span>
-                <span className="tag">Motion Graphics</span>
-              </div>
-            </div>
-          </div>
+          {WORKS_DATA.filter(item => selectedCategory === 'All' || item.category === selectedCategory).map((item) => {
+            const isYoutube = !!item.youtubeId;
+            const thumbUrl = isYoutube 
+              ? `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`
+              : item.thumbnailUrl;
 
-          <div className="work-card med reveal reveal-delay-1">
-            <div className="work-thumb">
-              <video
-                className="portfolio-video"
-                src={sample2}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-              <div className="thumb-overlay" />
-              <div className="play-btn" onClick={() => openVideoOverlay(sample2, 'Voices of Mumbai — Feature Doc')}>
-                <div className="play-btn-inner" />
-              </div>
-            </div>
-            <div className="work-info">
-              <div className="work-cat">Documentary</div>
-              <div className="work-title">Voices of Mumbai — Feature Doc</div>
-              <div className="work-meta">
-                <span>2024</span>
-                <span className="work-meta-sep">·</span>
-                <span>82 min</span>
-                <span className="work-meta-sep">·</span>
-                <span>Festival Circuit</span>
-              </div>
-              <div className="work-tags">
-                <span className="tag highlight">DaVinci Resolve</span>
-                <span className="tag">Sound Design</span>
-                <span className="tag">Narrative</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="work-card third reveal">
-            <div className="work-thumb">
-              <video
-                className="portfolio-video"
-                src={sample2}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-              <div className="thumb-overlay" />
-              <div className="play-btn" onClick={() => openVideoOverlay(sample2, 'Zomato Reels Series')}>
-                <div className="play-btn-inner" />
-              </div>
-            </div>
-            <div className="work-info">
-              <div className="work-cat">Social Media</div>
-              <div className="work-title">Zomato Reels Series</div>
-              <div className="work-meta">
-                <span>2023</span>
-                <span className="work-meta-sep">·</span>
-                <span>80M+ Views</span>
-              </div>
-              <div className="work-tags">
-                <span className="tag highlight">Final Cut</span>
-                <span className="tag">Vertical Format</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="work-card third reveal reveal-delay-1">
-            <div className="work-thumb">
-              <video
-                className="portfolio-video"
-                src={sample2}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-              <div className="thumb-overlay" />
-              <div className="play-btn" onClick={() => openVideoOverlay(sample2, 'Prateek Kuhad — Cold/Mess')}>
-                <div className="play-btn-inner" />
-              </div>
-            </div>
-            <div className="work-info">
-              <div className="work-cat">Music Video</div>
-              <div className="work-title">Prateek Kuhad — "Cold/Mess"</div>
-              <div className="work-meta">
-                <span>2023</span>
-                <span className="work-meta-sep">·</span>
-                <span>18M Views</span>
-              </div>
-              <div className="work-tags">
-                <span className="tag highlight">Premiere Pro</span>
-                <span className="tag">VFX</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="work-card third reveal reveal-delay-2">
-            <div className="work-thumb">
-              <video
-                className="portfolio-video"
-                src={sample2}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-              <div className="thumb-overlay" />
-              <div className="play-btn" onClick={() => openVideoOverlay(sample2, 'Cult.fit — Launch Film')}>
-                <div className="play-btn-inner" />
-              </div>
-            </div>
-            <div className="work-info">
-              <div className="work-cat">Brand Film</div>
-              <div className="work-title">Cult.fit — Launch Film</div>
-              <div className="work-meta">
-                <span>2023</span>
-                <span className="work-meta-sep">·</span>
-                <span>2:20 min</span>
-              </div>
-              <div className="work-tags">
-                <span className="tag highlight">DaVinci</span>
-                <span className="tag">Color</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="work-card wide reveal">
-            <div className="work-thumb">
-              <video
-                className="portfolio-video"
-                src={sample2}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-              <div className="work-thumb-inner" style={{ background: 'linear-gradient(135deg,#0D2A1A,#1B5C3A,#2A1A0D)' }}>
-                <div className="film-strip">
-                  <div className="film-frame" style={{ background: 'rgba(255,107,26,0.1)' }}>
-                    <div className="film-perf-row">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
+            return (
+              <div 
+                key={item.id} 
+                className={`work-card reveal ${item.gridClass}`}
+              >
+                <div className="work-thumb">
+                  <img
+                    className="portfolio-thumb-img"
+                    src={thumbUrl}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                  <div className="thumb-overlay" />
+                  <div className="play-btn" onClick={() => openVideoOverlay(item)}>
+                    <div className="play-btn-inner" />
                   </div>
-                  <div className="film-frame" style={{ background: 'rgba(255,90,20,0.15)' }}>
-                    <div className="film-perf-row">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
+                  {item.isVertical && (
+                    <span className="vertical-badge" style={{ position: 'absolute', top: '16px', left: '16px', background: 'rgba(255,107,26,0.9)', color: '#fff', fontSize: '9px', fontFamily: 'Space Mono, monospace', padding: '3px 8px', borderRadius: '4px', letterSpacing: '0.05em' }}>
+                      SHORTS / REEL
+                    </span>
+                  )}
+                </div>
+                <div className="work-info">
+                  <div className="work-cat">{item.category}</div>
+                  <div className="work-title" style={{ fontSize: '18px', lineHeight: '1.3', marginBottom: '8px' }}>{item.title}</div>
+                  <p style={{ fontSize: '13px', color: 'var(--silver)', margin: '0 0 16px', fontWeight: 300, lineHeight: 1.5 }}>
+                    {item.description}
+                  </p>
+                  <div className="work-meta" style={{ marginBottom: '12px' }}>
+                    <span>{item.meta}</span>
                   </div>
-                  <div className="film-frame" style={{ background: 'rgba(255,107,26,0.08)' }}>
-                    <div className="film-perf-row">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                  </div>
-                  <div className="film-frame" style={{ background: 'rgba(255,120,40,0.12)' }}>
-                    <div className="film-perf-row">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                  </div>
-                  <div className="film-frame" style={{ background: 'rgba(255,107,26,0.1)' }}>
-                    <div className="film-perf-row">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                  </div>
-                  <div className="film-frame" style={{ background: 'rgba(255,80,10,0.15)' }}>
-                    <div className="film-perf-row">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                  </div>
-                  <div className="film-frame" style={{ background: 'rgba(255,107,26,0.1)' }}>
-                    <div className="film-perf-row">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                  </div>
-                  <div className="film-frame" style={{ background: 'rgba(255,100,30,0.12)' }}>
-                    <div className="film-perf-row">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
+                  <div className="work-tags">
+                    {item.tags.map((tag, idx) => (
+                      <span key={idx} className="tag highlight">{tag}</span>
+                    ))}
                   </div>
                 </div>
-                <span style={{ position: 'absolute', fontSize: '60px', opacity: 0.25 }}>🌏</span>
               </div>
-              <div className="thumb-overlay" />
-              <div className="play-btn" onClick={() => openVideoOverlay(sample2, 'Amazon Prime — Edge of the Map Travel Series')}>
-                <div className="play-btn-inner" />
-              </div>
-            </div>
-            <div className="work-info">
-              <div className="work-cat">Web Series</div>
-              <div className="work-title">Amazon Prime — "Edge of the Map" Travel Series (6 Episodes)</div>
-              <div className="work-meta">
-                <span>2024</span>
-                <span className="work-meta-sep">·</span>
-                <span>6 × 28 min</span>
-                <span className="work-meta-sep">·</span>
-                <span>Streaming Worldwide</span>
-                <span className="work-meta-sep">·</span>
-                <span>4K RAW</span>
-              </div>
-              <div className="work-tags">
-                <span className="tag highlight">DaVinci Resolve</span>
-                <span className="tag highlight">Premiere Pro</span>
-                <span className="tag">4K HDR</span>
-                <span className="tag">Drone Footage</span>
-                <span className="tag">Multi-cam</span>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </section>
 
@@ -1211,14 +1152,41 @@ function App() {
             </button>
             <div className="video-overlay-header">
               <h3>{videoOverlay.title}</h3>
+              <p style={{ color: 'var(--silver)', fontSize: '13px', marginTop: '4px', fontFamily: 'Space Mono, monospace' }}>
+                // Category: {videoOverlay.category}
+              </p>
             </div>
-            <video
-              className="video-overlay-player"
-              src={videoOverlay.src}
-              controls
-              autoPlay
-              playsInline
-            />
+            
+            {videoOverlay.youtubeId ? (
+              <div className="video-iframe-container" style={{ position: 'relative', paddingBottom: videoOverlay.isVertical ? '177.78%' : '56.25%', height: 0, overflow: 'hidden', borderRadius: '12px', background: '#000' }}>
+                <iframe
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                  src={`https://www.youtube.com/embed/${videoOverlay.youtubeId}?autoplay=1&rel=0`}
+                  title={videoOverlay.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <div className="instagram-overlay-container" style={{ background: 'var(--card)', border: '1px solid var(--glass-border)', padding: '60px 40px', borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '24px' }}>
+                <div style={{ fontSize: '64px', filter: 'drop-shadow(0 0 15px rgba(255, 107, 26, 0.4))' }}>📸</div>
+                <div>
+                  <h4 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '12px', fontFamily: 'Space Grotesk, sans-serif' }}>Instagram Reel Content</h4>
+                  <p style={{ color: 'var(--silver)', maxWidth: '450px', margin: '0 auto', fontSize: '14px', lineHeight: '1.6', fontWeight: 300 }}>
+                    Instagram reels are optimized for native viewing inside the Instagram platform to ensure high-fidelity audio and motion playback. Click below to view the reel directly.
+                  </p>
+                </div>
+                <a
+                  href={videoOverlay.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  style={{ textDecoration: 'none', display: 'inline-block', fontSize: '13px', padding: '16px 40px' }}
+                >
+                  View Reel on Instagram →
+                </a>
+              </div>
+            )}
           </div>
         </div>
       )}

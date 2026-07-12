@@ -8,10 +8,10 @@ import cafeCover from './cafe_cover.png';
 const WORKS_DATA = [
   {
     id: 'sunit-long',
-    title: 'Dr. Sunit — Kegel Exercise Guide (Long Form)',
+    title: 'Dr Honey l NEVIRA™ — Screen Time, Sleep & Hormonal Balance',
     category: 'Healthcare',
-    videoUrl: 'https://youtu.be/PDxm6HxDTfU?si=CDV5oxun-uDeW9bT',
-    youtubeId: 'PDxm6HxDTfU',
+    videoUrl: 'https://youtu.be/R2pQ2SS3G_k?si=4SVIOmzwAZduaApO',
+    youtubeId: 'R2pQ2SS3G_k',
     isVertical: false,
     gridClass: 'span-8',
     meta: 'Long Form · 2024',
@@ -56,10 +56,10 @@ const WORKS_DATA = [
   },
   {
     id: 'govind-short',
-    title: 'Dr. Govind — Healthcare Tip (Short)',
+    title: 'Dr. Kuldeep Sharma — Healthcare Tip (Short)',
     category: 'Healthcare',
-    videoUrl: 'https://youtube.com/shorts/ld1J6_4zrFg?si=Gm0egekFtN7SFEgF',
-    youtubeId: 'ld1J6_4zrFg',
+    videoUrl: ' https://youtube.com/shorts/7Va7u645qg8?si=TavCUC8FblytN-8s',
+    youtubeId: '7Va7u645qg8',
     isVertical: true,
     gridClass: 'span-4',
     meta: 'Short · 2024',
@@ -146,7 +146,7 @@ const WORKS_DATA = [
 
 function App() {
   const [reviews, setReviews] = useState(() => {
-        try {
+    try {
       const stored = localStorage.getItem('portfolioReviews');
       return stored ? JSON.parse(stored) : reviewsData;
     } catch (err) {
@@ -596,7 +596,7 @@ function App() {
           </p>
         </div>
 
-        <div className="works-filters">
+        {/* <div className="works-filters">
           {['All', 'Healthcare', 'Reels & Socials'].map((cat) => (
             <button
               key={cat}
@@ -606,7 +606,7 @@ function App() {
               {cat}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <div className="works-grid">
           {WORKS_DATA.filter(item => selectedCategory === 'All' || item.category === selectedCategory).map((item) => {
